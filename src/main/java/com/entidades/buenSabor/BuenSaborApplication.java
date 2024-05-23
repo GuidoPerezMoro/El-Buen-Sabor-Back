@@ -77,7 +77,7 @@ public class BuenSaborApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborApplication.class, args);
-		logger.info("Estoy activo en el main");
+		logger.info("\nEstoy activo en el main. URL H2: http://localhost:8080/h2-console/");
 	}
 
 	@Bean
@@ -101,7 +101,7 @@ public class BuenSaborApplication {
 						   PedidoRepository pedidoRepository,
 						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {
 		return args -> {
-			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
+			logger.info("---------------------ESTOY FUNCIONANDO---------------------");
 			// Etapa del dashboard
 			// Crear 1 pais
 			// Crear 2 provincias para ese pais
@@ -252,7 +252,7 @@ public class BuenSaborApplication {
 
 			logger.info("---------------grabe guaymallen--------------------");
 
-			logger.info("---------------voy a asignar a Mardel Plata--------------------");
+			logger.info("---------------voy a asignar a Mar del Plata--------------------");
 			categoriaInsumos.getSucursales().add(sucursalVistalba);
 			// Cargo las categorias a la sucursal Mardel Plata
 			sucursalVistalba.getCategorias().add(categoriaInsumos);
@@ -263,7 +263,7 @@ public class BuenSaborApplication {
 // Grabo las categorias que vende esa sucursal
 			sucursalRepository.save(sucursalVistalba);
 
-			logger.info("---------------grabe Mardel Plata--------------------");
+			logger.info("---------------grabe Mar del Plata--------------------");
 
 
 
