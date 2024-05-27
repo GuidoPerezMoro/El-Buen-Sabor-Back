@@ -75,6 +75,9 @@ public class BuenSaborApplication {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
+	@Autowired
+	private ArticuloRepository articuloRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborApplication.class, args);
 		logger.info("Estoy activo en el main");
@@ -99,7 +102,8 @@ public class BuenSaborApplication {
 						   ImagenArticuloRepository imagenArticuloRepository,
 						   PromocionRepository promocionRepository,
 						   PedidoRepository pedidoRepository,
-						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {
+						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository,
+						   ArticuloRepository articuloRepository) {
 		return args -> {
 			// Etapa del dashboard
 			// Crear 1 pais
@@ -245,13 +249,6 @@ public class BuenSaborApplication {
 			logger.info("{}",sucursalLujan);
 			// Grabo las categorias que vende esa sucursal
 			sucursalRepository.save(sucursalLujan);
-
-			logger.info("---------------saque el save de abajo-------------------");
-
-
-			logger.info("---------------grabe guaymallen--------------------");
-
-			logger.info("---------------voy a asignar a Mar del Plata--------------------");
 			categoriaInsumos.getSucursales().add(sucursalVistalba);
 			// Cargo las categorias a la sucursal Mardel Plata
 			sucursalVistalba.getCategorias().add(categoriaInsumos);
@@ -262,7 +259,6 @@ public class BuenSaborApplication {
 // Grabo las categorias que vende esa sucursal
 			sucursalRepository.save(sucursalVistalba);
 
-			logger.info("---------------grabe Mar del Plata--------------------");
 
 
 
@@ -339,6 +335,52 @@ public class BuenSaborApplication {
 			// GRABAMOS LA RECETA
 			articuloManufacturadoRepository.save(pizzaMuzarella);
 			articuloManufacturadoRepository.save(pizzaNapolitana);
+
+			PromocionDetalle promocionDetalle1 = PromocionDetalle.builder()
+					.cantidad(2)
+					.articulo(pizzaMuzarella)
+					.build();
+
+			PromocionDetalle promocionDetalle2 = PromocionDetalle.builder()
+					.cantidad(1)
+					.articulo(pizzaMuzarella)
+					.build();
+
+			Promocion promocionDiaEnamorados = Promocion.builder().denominacion("Dia de los Enamorados")
+					.fechaDesde(LocalDate.of(2024,2,13))
+					.fechaHasta(LocalDate.of(2024,2,15))
+					.horaDesde(LocalTime.of(0,0))
+					.horaHasta(LocalTime.of(23,59))
+					.descripcionDescuento("El descuento que se hace por san valentin, un dia antes y un dia despues")
+					.precioPromocional(100.0)
+					.tipoPromocion(TipoPromocion.PROMOCION)
+					.habilitado(true)
+					.build();
+			promocionDiaEnamorados.getDetalles().add(promocionDetalle1);
+
+
+
+
+			Promocion promocionDiaDeLaMadre = Promocion.builder().denominacion("Dia de la madre")
+					.fechaDesde(LocalDate.of(2024,10,19))
+					.fechaHasta(LocalDate.of(2024,10,21))
+					.horaDesde(LocalTime.of(0,0))
+					.horaHasta(LocalTime.of(23,59))
+					.descripcionDescuento("El descuento que se hace por el dia de la madre, un dia antes y un dia despues")
+					.precioPromocional(100.0)
+					.tipoPromocion(TipoPromocion.PROMOCION)
+					.habilitado(true)
+					.build();
+			promocionDiaDeLaMadre.getDetalles().add(promocionDetalle2);
+			promocionRepository.save(promocionDiaEnamorados);
+			promocionRepository.save(promocionDiaDeLaMadre);
+
+
+
+
+
+
+
 			/*
 			// crear fotos para cada insumo
 			ImagenArticulo imagenArticuloCoca = ImagenArticulo.builder().
