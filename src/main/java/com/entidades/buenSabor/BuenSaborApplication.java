@@ -77,7 +77,7 @@ public class BuenSaborApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborApplication.class, args);
-		logger.info("\nEstoy activo en el main. URL H2: http://localhost:8080/h2-console/");
+		logger.info("Estoy activo en el main");
 	}
 
 	@Bean
@@ -101,7 +101,6 @@ public class BuenSaborApplication {
 						   PedidoRepository pedidoRepository,
 						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {
 		return args -> {
-			logger.info("---------------------ESTOY FUNCIONANDO---------------------");
 			// Etapa del dashboard
 			// Crear 1 pais
 			// Crear 2 provincias para ese pais
@@ -129,8 +128,8 @@ public class BuenSaborApplication {
 
 			Empresa empresaMichel = Empresa.builder().nombre("Michel").cuil(20586935L).razonSocial("Heladeria").build();
 			empresaRepository.save(empresaMichel);
-            Empresa empresaJebbs = Empresa.builder().nombre("Jebbs").cuil(5856335L).razonSocial("Panaderia").build();
-            empresaRepository.save(empresaJebbs );
+			Empresa empresaJebbs = Empresa.builder().nombre("Jebbs").cuil(5856335L).razonSocial("Panaderia").build();
+			empresaRepository.save(empresaJebbs );
 
 			Sucursal sucursalLujan = Sucursal.builder().
 					nombre("Michel Lujan").horarioApertura(LocalTime.of(9,0)).
@@ -144,17 +143,17 @@ public class BuenSaborApplication {
 					esCasaMatriz(false).
 					build();
 
-            Sucursal sucursalChacras = Sucursal.builder().
-                    nombre("Jebbs Chacras").horarioApertura(LocalTime.of(9,0)).
-                    horarioCierre(LocalTime.of(23,0)).
-                    esCasaMatriz(true).
-                    build();
+			Sucursal sucursalChacras = Sucursal.builder().
+					nombre("Jebbs Chacras").horarioApertura(LocalTime.of(9,0)).
+					horarioCierre(LocalTime.of(23,0)).
+					esCasaMatriz(true).
+					build();
 
-            Sucursal sucursalGodoyCruz = Sucursal.builder().
-                    nombre("Jebbs Godoy Cruz").horarioApertura(LocalTime.of(9,0)).
-                    horarioCierre(LocalTime.of(23,0)).
-                    esCasaMatriz(false).
-                    build();
+			Sucursal sucursalGodoyCruz = Sucursal.builder().
+					nombre("Jebbs Godoy Cruz").horarioApertura(LocalTime.of(9,0)).
+					horarioCierre(LocalTime.of(23,0)).
+					esCasaMatriz(false).
+					build();
 
 			Domicilio domicilioLujan= Domicilio.builder().cp(5507).calle("Federico Serpa").numero(375).piso(0).nroDpto(0).
 					localidad(localidad1).build();
@@ -162,40 +161,40 @@ public class BuenSaborApplication {
 			Domicilio domicilioVistalba= Domicilio.builder().cp(7600).calle("Guardia Vieja").numero(1400).
 					localidad(localidad1).build();
 
-            Domicilio domicilioChacras= Domicilio.builder().cp(5507).calle("Viamonte").numero(3335).piso(0).nroDpto(0).
-                    localidad(localidad2).build();
-            Domicilio domicilioGodoyCruz= Domicilio.builder().cp(5507).calle("Perito Moreno").numero(1500).piso(0).nroDpto(0).
-                    localidad(localidad3).build();
+			Domicilio domicilioChacras= Domicilio.builder().cp(5507).calle("Viamonte").numero(3335).piso(0).nroDpto(0).
+					localidad(localidad2).build();
+			Domicilio domicilioGodoyCruz= Domicilio.builder().cp(5507).calle("Perito Moreno").numero(1500).piso(0).nroDpto(0).
+					localidad(localidad3).build();
 
 			//ASOCIAMOS LOS DOMICILIOS A SUCURSAL
 			sucursalLujan.setDomicilio(domicilioLujan);
 
 			sucursalChacras.setDomicilio(domicilioChacras);
 
-            sucursalVistalba.setDomicilio(domicilioVistalba);
-            sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
+			sucursalVistalba.setDomicilio(domicilioVistalba);
+			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
 
 			//ASOCIAMOS SUCURSALES A EMPRESA
 			empresaMichel.getSucursales().add(sucursalLujan);
 			empresaMichel.getSucursales().add(sucursalVistalba);
 
-            empresaJebbs.getSucursales().add(sucursalChacras);
-            empresaJebbs.getSucursales().add(sucursalGodoyCruz);
+			empresaJebbs.getSucursales().add(sucursalChacras);
+			empresaJebbs.getSucursales().add(sucursalGodoyCruz);
 
 			//ASIGNAMOS EMPRESA A SUCURSALES
 			sucursalLujan.setEmpresa(empresaMichel);
 			sucursalVistalba.setEmpresa(empresaMichel);
 
-            sucursalChacras.setEmpresa(empresaJebbs);
-            sucursalGodoyCruz.setEmpresa(empresaJebbs);
+			sucursalChacras.setEmpresa(empresaJebbs);
+			sucursalGodoyCruz.setEmpresa(empresaJebbs);
 			// Grabo las sucursales
 			sucursalRepository.save(sucursalLujan);
 			sucursalRepository.save(sucursalChacras);
-            sucursalRepository.save(sucursalVistalba);
-            sucursalRepository.save(sucursalGodoyCruz);
+			sucursalRepository.save(sucursalVistalba);
+			sucursalRepository.save(sucursalGodoyCruz);
 			// Grabi empresa
 			empresaRepository.save(empresaMichel);
-            empresaRepository.save(empresaJebbs);
+			empresaRepository.save(empresaJebbs);
 
 			// Crear Categorías de productos y subCategorías de los mismos
 			Categoria categoriaBebidas = Categoria.builder().denominacion("Bebidas")
@@ -204,8 +203,8 @@ public class BuenSaborApplication {
 			categoriaRepository.save(categoriaBebidas);
 
 			Categoria categoriaGaseosas = Categoria.builder().denominacion("Gaseosas").
-			esInsumo(true)
-			.build();
+					esInsumo(true)
+					.build();
 			categoriaRepository.save(categoriaGaseosas);
 
 			Categoria categoriaTragos = Categoria.builder().denominacion("Tragos")

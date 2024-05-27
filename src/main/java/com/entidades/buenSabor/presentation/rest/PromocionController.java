@@ -1,39 +1,36 @@
 package com.entidades.buenSabor.presentation.rest;
 
-import com.entidades.buenSabor.business.facade.Imp.EmpresaFacadeImpl;
-
-import com.entidades.buenSabor.domain.dto.Empresa.EmpresaCreateDto;
-import com.entidades.buenSabor.domain.dto.Empresa.EmpresaDto;
-
-import com.entidades.buenSabor.domain.dto.Empresa.EmpresaEditDto;
-import com.entidades.buenSabor.domain.dto.Empresa.EmpresaLargeDto;
-import com.entidades.buenSabor.domain.entities.Empresa;
-
+import com.entidades.buenSabor.business.facade.Imp.PromocionFacadeImp;
+import com.entidades.buenSabor.domain.dto.Promocion.PromocionCreate;
+import com.entidades.buenSabor.domain.dto.Promocion.PromocionDto;
+import com.entidades.buenSabor.domain.dto.Promocion.PromocionEdit;
+import com.entidades.buenSabor.domain.entities.Promocion;
 import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController
-@RequestMapping("/empresa")
 @CrossOrigin("*")
-public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, EmpresaCreateDto, EmpresaEditDto,Long, EmpresaFacadeImpl> {
-    public EmpresaController(EmpresaFacadeImpl facade) {
+@RequestMapping("/promocion")
+@RestController
+public class PromocionController extends BaseControllerImp<Promocion, PromocionDto, PromocionCreate, PromocionEdit, Long, PromocionFacadeImp> {
+    public PromocionController(PromocionFacadeImp facade) {
         super(facade);
     }
 
-    @GetMapping("/sucursales/{idEmpresa}")
-    public ResponseEntity<EmpresaLargeDto> getEmpresaSucursales(@PathVariable Long idEmpresa){
-        return ResponseEntity.ok(facade.getEmpresaSucursales(idEmpresa));
+    @PutMapping("/changeHabilitado/{id}")
+    public ResponseEntity<?> changeHabilitado(@PathVariable Long id){
+        facade.changeHabilitado(id);
+        return ResponseEntity.ok("Cambio realizado con exito");
     }
 
     // Método POST para subir imágenes
     @PostMapping("/uploads")
     public ResponseEntity<String> uploadImages(
             @RequestParam(value = "uploads", required = true) MultipartFile[] files,
-            @RequestParam(value = "id", required = true) Long idEmpresa) {
+            @RequestParam(value = "id", required = true) Long idPromocion) {
         try {
-            return facade.uploadImages(files, idEmpresa); // Llama al método del servicio para subir imágenes
+            return facade.uploadImages(files, idPromocion); // Llama al método del servicio para subir imágenes
         } catch (Exception e) {
             e.printStackTrace();
             return null; // Manejo básico de errores, se puede mejorar para devolver una respuesta más específica
@@ -57,14 +54,13 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Em
     }
 
     // Método GET para obtener todas las imágenes almacenadas
-    @GetMapping("/getImagesByEmpresaId/{id}")
+    @GetMapping("/getImagesByArticuloId/{id}")
     public ResponseEntity<?> getAll(@PathVariable Long id) {
         try {
-            return facade.getAllImagesByEmpresaId(id); // Llama al método del servicio para obtener todas las imágenes
+            return facade.getAllImagesByPromocionId(id); // Llama al método del servicio para obtener todas las imágenes
         } catch (Exception e) {
             e.printStackTrace();
             return null; // Manejo básico de errores, se puede mejorar para devolver una respuesta más específica
         }
     }
-
 }
