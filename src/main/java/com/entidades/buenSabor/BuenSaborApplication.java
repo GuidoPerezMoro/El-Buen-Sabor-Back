@@ -361,6 +361,7 @@ public class BuenSaborApplication {
 
 
 
+
 			Promocion promocionDiaDeLaMadre = Promocion.builder().denominacion("Dia de la madre")
 					.fechaDesde(LocalDate.of(2024,10,19))
 					.fechaHasta(LocalDate.of(2024,10,21))
@@ -372,6 +373,7 @@ public class BuenSaborApplication {
 					.habilitado(true)
 					.build();
 			promocionDiaDeLaMadre.getDetalles().add(promocionDetalle2);
+
 			promocionRepository.save(promocionDiaEnamorados);
 			promocionRepository.save(promocionDiaDeLaMadre);
 
