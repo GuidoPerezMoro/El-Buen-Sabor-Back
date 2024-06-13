@@ -1,7 +1,6 @@
 package com.entidades.buenSabor;
 
 import com.entidades.buenSabor.domain.entities.*;
-import com.entidades.buenSabor.domain.enums.*;
 import com.entidades.buenSabor.repositories.*;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -13,20 +12,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Random;
-import java.util.Set;
 
 
 @SpringBootApplication
 public class BuenSaborApplication {
 	private static final Logger logger = LoggerFactory.getLogger(BuenSaborApplication.class);
-
+/*
 	@Autowired
 	private ClienteRepository clienteRepository;
 	@Autowired
-	private ImagenPersonaRepository imagenPersonaRepository;
+	private ImagenEmpleadoRepository imagenEmpleadoRepository;
 	@Autowired
 	private PromocionDetalleRepository promocionDetalleRepository;
 
@@ -74,19 +70,17 @@ public class BuenSaborApplication {
 
 	@Autowired
 	private PedidoRepository pedidoRepository;
-
-	@Autowired
-	private ArticuloRepository articuloRepository;
-
+*/
 	public static void main(String[] args) {
 		SpringApplication.run(BuenSaborApplication.class, args);
-		logger.info("Estoy activo en el main");
+		logger.info("\nEstoy activo en el main");
 	}
 
+	/*
 	@Bean
 	@Transactional
 	CommandLineRunner init(ClienteRepository clienteRepository,
-						   ImagenPersonaRepository imagenPersonaRepository,
+						   ImagenEmpleadoRepository imagenEmpleadoRepository,
 						   PromocionDetalleRepository promocionDetalleRepository,
 						   UsuarioRepository usuarioRepository,
 						   PaisRepository paisRepository,
@@ -102,9 +96,9 @@ public class BuenSaborApplication {
 						   ImagenArticuloRepository imagenArticuloRepository,
 						   PromocionRepository promocionRepository,
 						   PedidoRepository pedidoRepository,
-						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository,
-						   ArticuloRepository articuloRepository) {
+						   EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {
 		return args -> {
+			logger.info("----------------ESTOY----FUNCIONANDO---------------------");
 			// Etapa del dashboard
 			// Crear 1 pais
 			// Crear 2 provincias para ese pais
@@ -112,15 +106,15 @@ public class BuenSaborApplication {
 			Pais pais1 = Pais.builder().nombre("Argentina").build();
 			paisRepository.save(pais1);
 			//CREACION DE PROVINCIAS
-			Provincia provincia1 = Provincia.builder().nombre("Mendoza").pais(pais1).build();
+			Provincia provincia1 = Provincia.builder().nombre("Mendoza1").pais(pais1).build();
 			Provincia provincia2 = Provincia.builder().nombre("Buenos Aires1").pais(pais1).build();
 			provinciaRepository.save(provincia1);
 			provinciaRepository.save(provincia2);
 
 			//CREACION DE LOCALIDADES
-			Localidad localidad1 = Localidad.builder().nombre("Lujan de Cuyo").provincia(provincia1).build();
-			Localidad localidad2 = Localidad.builder().nombre("Chacras").provincia(provincia1).build();
-			Localidad localidad3 = Localidad.builder().nombre("Godoy Cruz").provincia(provincia2).build();
+			Localidad localidad1 = Localidad.builder().nombre("Lujan de Cuyo1").provincia(provincia1).build();
+			Localidad localidad2 = Localidad.builder().nombre("Guaymallen1").provincia(provincia1).build();
+			Localidad localidad3 = Localidad.builder().nombre("Mar del Plata1").provincia(provincia2).build();
 			Localidad localidad4 = Localidad.builder().nombre("Mar de las Pampas1").provincia(provincia2).build();
 
 			localidadRepository.save(localidad1);
@@ -130,75 +124,43 @@ public class BuenSaborApplication {
 
 			// Crear 1 empresa, 2 sucursales para esa empresa y los Domicilios para esas sucursales
 
-			Empresa empresaMichel = Empresa.builder().nombre("Michel").cuil(20586935L).razonSocial("Heladeria").build();
-			empresaRepository.save(empresaMichel);
-			Empresa empresaJebbs = Empresa.builder().nombre("Jebbs").cuil(5856335L).razonSocial("Panaderia").build();
-			empresaRepository.save(empresaJebbs );
+			Empresa empresaCarlos = Empresa.builder().nombre("Lo de Carlos").cuil(30546780L).razonSocial("Venta de Alimentos").build();
+			empresaRepository.save(empresaCarlos);
 
-			Sucursal sucursalLujan = Sucursal.builder().
-					nombre("Michel Lujan").horarioApertura(LocalTime.of(9,0)).
+			Sucursal sucursalGuaymallen = Sucursal.builder().
+					nombre("En Guaymallen").horarioApertura(LocalTime.of(17,0)).
 					horarioCierre(LocalTime.of(23,0)).
 					esCasaMatriz(true).
 					build();
 
-			Sucursal sucursalVistalba = Sucursal.builder().nombre("Michel Vistalba").
-					horarioApertura(LocalTime.of(9,0)).
+			Sucursal sucursalMarDelPlata = Sucursal.builder().nombre("En MDQ").
+					horarioApertura(LocalTime.of(16,0)).
 					horarioCierre(LocalTime.of(23,30)).
 					esCasaMatriz(false).
 					build();
 
-			Sucursal sucursalChacras = Sucursal.builder().
-					nombre("Jebbs Chacras").horarioApertura(LocalTime.of(9,0)).
-					horarioCierre(LocalTime.of(23,0)).
-					esCasaMatriz(true).
-					build();
-
-			Sucursal sucursalGodoyCruz = Sucursal.builder().
-					nombre("Jebbs Godoy Cruz").horarioApertura(LocalTime.of(9,0)).
-					horarioCierre(LocalTime.of(23,0)).
-					esCasaMatriz(false).
-					build();
-
-			Domicilio domicilioLujan= Domicilio.builder().cp(5507).calle("Federico Serpa").numero(375).piso(0).nroDpto(0).
+			Domicilio domicilioBerutti = Domicilio.builder().cp(5519).calle("Berutti").numero(2684).piso(0).nroDpto(5).
 					localidad(localidad1).build();
 
-			Domicilio domicilioVistalba= Domicilio.builder().cp(7600).calle("Guardia Vieja").numero(1400).
-					localidad(localidad1).build();
-
-			Domicilio domicilioChacras= Domicilio.builder().cp(5507).calle("Viamonte").numero(3335).piso(0).nroDpto(0).
+			Domicilio domicilioGaboto = Domicilio.builder().cp(7600).calle("Gaboto").numero(3475).
 					localidad(localidad2).build();
-			Domicilio domicilioGodoyCruz= Domicilio.builder().cp(5507).calle("Perito Moreno").numero(1500).piso(0).nroDpto(0).
-					localidad(localidad3).build();
 
 			//ASOCIAMOS LOS DOMICILIOS A SUCURSAL
-			sucursalLujan.setDomicilio(domicilioLujan);
-
-			sucursalChacras.setDomicilio(domicilioChacras);
-
-			sucursalVistalba.setDomicilio(domicilioVistalba);
-			sucursalGodoyCruz.setDomicilio(domicilioGodoyCruz);
+			sucursalGuaymallen.setDomicilio(domicilioBerutti);
+			sucursalMarDelPlata.setDomicilio(domicilioGaboto);
 
 			//ASOCIAMOS SUCURSALES A EMPRESA
-			empresaMichel.getSucursales().add(sucursalLujan);
-			empresaMichel.getSucursales().add(sucursalVistalba);
-
-			empresaJebbs.getSucursales().add(sucursalChacras);
-			empresaJebbs.getSucursales().add(sucursalGodoyCruz);
+			empresaCarlos.getSucursales().add(sucursalGuaymallen);
+			empresaCarlos.getSucursales().add(sucursalMarDelPlata);
 
 			//ASIGNAMOS EMPRESA A SUCURSALES
-			sucursalLujan.setEmpresa(empresaMichel);
-			sucursalVistalba.setEmpresa(empresaMichel);
-
-			sucursalChacras.setEmpresa(empresaJebbs);
-			sucursalGodoyCruz.setEmpresa(empresaJebbs);
+			sucursalGuaymallen.setEmpresa(empresaCarlos);
+			sucursalMarDelPlata.setEmpresa(empresaCarlos);
 			// Grabo las sucursales
-			sucursalRepository.save(sucursalLujan);
-			sucursalRepository.save(sucursalChacras);
-			sucursalRepository.save(sucursalVistalba);
-			sucursalRepository.save(sucursalGodoyCruz);
+			sucursalRepository.save(sucursalGuaymallen);
+			sucursalRepository.save(sucursalMarDelPlata);
 			// Grabi empresa
-			empresaRepository.save(empresaMichel);
-			empresaRepository.save(empresaJebbs);
+			empresaRepository.save(empresaCarlos);
 
 			// Crear Categorías de productos y subCategorías de los mismos
 			Categoria categoriaBebidas = Categoria.builder().denominacion("Bebidas")
@@ -207,8 +169,8 @@ public class BuenSaborApplication {
 			categoriaRepository.save(categoriaBebidas);
 
 			Categoria categoriaGaseosas = Categoria.builder().denominacion("Gaseosas").
-					esInsumo(true)
-					.build();
+			esInsumo(true)
+			.build();
 			categoriaRepository.save(categoriaGaseosas);
 
 			Categoria categoriaTragos = Categoria.builder().denominacion("Tragos")
@@ -239,26 +201,34 @@ public class BuenSaborApplication {
 
 			logger.info("---------------voy a asignar a Guaymallen--------------------");
 			//ASOCIAMOS CATEGORIAS CON SUCURSAL
-			categoriaInsumos.getSucursales().add(sucursalLujan);
+			categoriaInsumos.getSucursales().add(sucursalGuaymallen);
 			// Cargo las categorias a la sucursal guaymallen
-			sucursalLujan.getCategorias().add(categoriaInsumos);
-			sucursalLujan.getCategorias().add(categoriaBebidas);
-			sucursalLujan.getCategorias().add(categoriaGaseosas);
-			sucursalLujan.getCategorias().add(categoriaTragos);
-			sucursalLujan.getCategorias().add(categoriaPizzas);
-			logger.info("{}",sucursalLujan);
+			sucursalGuaymallen.getCategorias().add(categoriaInsumos);
+			sucursalGuaymallen.getCategorias().add(categoriaBebidas);
+			sucursalGuaymallen.getCategorias().add(categoriaGaseosas);
+			sucursalGuaymallen.getCategorias().add(categoriaTragos);
+			sucursalGuaymallen.getCategorias().add(categoriaPizzas);
+			logger.info("{}",sucursalGuaymallen);
 			// Grabo las categorias que vende esa sucursal
-			sucursalRepository.save(sucursalLujan);
-			categoriaInsumos.getSucursales().add(sucursalVistalba);
-			// Cargo las categorias a la sucursal Mardel Plata
-			sucursalVistalba.getCategorias().add(categoriaInsumos);
-			sucursalVistalba.getCategorias().add(categoriaBebidas);
-			sucursalVistalba.getCategorias().add(categoriaGaseosas);
-			sucursalVistalba.getCategorias().add(categoriaTragos);
-			sucursalVistalba.getCategorias().add(categoriaPizzas);
-// Grabo las categorias que vende esa sucursal
-			sucursalRepository.save(sucursalVistalba);
+			sucursalRepository.save(sucursalGuaymallen);
 
+			logger.info("---------------saque el save de abajo-------------------");
+
+
+			logger.info("---------------grabe guaymallen--------------------");
+
+			logger.info("---------------voy a asignar a Mardel Plata--------------------");
+			categoriaInsumos.getSucursales().add(sucursalMarDelPlata);
+			// Cargo las categorias a la sucursal Mardel Plata
+			sucursalMarDelPlata.getCategorias().add(categoriaInsumos);
+			sucursalMarDelPlata.getCategorias().add(categoriaBebidas);
+			sucursalMarDelPlata.getCategorias().add(categoriaGaseosas);
+			sucursalMarDelPlata.getCategorias().add(categoriaTragos);
+			sucursalMarDelPlata.getCategorias().add(categoriaPizzas);
+// Grabo las categorias que vende esa sucursal
+			sucursalRepository.save(sucursalMarDelPlata);
+
+			logger.info("---------------grabe Mardel Plata--------------------");
 
 
 
@@ -284,6 +254,7 @@ public class BuenSaborApplication {
 					stockMaximo(50).
 					precioCompra(50.0).
 					precioVenta(70.0).
+					categoria(categoriaBebidas).
 					build();
 			ArticuloInsumo harina = ArticuloInsumo.builder().denominacion("Harina").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(4).stockMaximo(40).precioCompra(40.0).precioVenta(60.5).build();
 			ArticuloInsumo queso = ArticuloInsumo.builder().denominacion("Queso").unidadMedida(unidadMedidaGramos).esParaElaborar(true).stockActual(20).stockMaximo(50).precioCompra(23.6).precioVenta(66.6).build();
@@ -336,54 +307,6 @@ public class BuenSaborApplication {
 			articuloManufacturadoRepository.save(pizzaMuzarella);
 			articuloManufacturadoRepository.save(pizzaNapolitana);
 
-			PromocionDetalle promocionDetalle1 = PromocionDetalle.builder()
-					.cantidad(2)
-					.articulo(pizzaMuzarella)
-					.build();
-
-			PromocionDetalle promocionDetalle2 = PromocionDetalle.builder()
-					.cantidad(1)
-					.articulo(pizzaMuzarella)
-					.build();
-
-			Promocion promocionDiaEnamorados = Promocion.builder().denominacion("Dia de los Enamorados")
-					.fechaDesde(LocalDate.of(2024,2,13))
-					.fechaHasta(LocalDate.of(2024,2,15))
-					.horaDesde(LocalTime.of(0,0))
-					.horaHasta(LocalTime.of(23,59))
-					.descripcionDescuento("El descuento que se hace por san valentin, un dia antes y un dia despues")
-					.precioPromocional(100.0)
-					.tipoPromocion(TipoPromocion.PROMOCION)
-					.habilitado(true)
-					.build();
-			promocionDiaEnamorados.getDetalles().add(promocionDetalle1);
-
-
-
-
-
-			Promocion promocionDiaDeLaMadre = Promocion.builder().denominacion("Dia de la madre")
-					.fechaDesde(LocalDate.of(2024,10,19))
-					.fechaHasta(LocalDate.of(2024,10,21))
-					.horaDesde(LocalTime.of(0,0))
-					.horaHasta(LocalTime.of(23,59))
-					.descripcionDescuento("El descuento que se hace por el dia de la madre, un dia antes y un dia despues")
-					.precioPromocional(100.0)
-					.tipoPromocion(TipoPromocion.PROMOCION)
-					.habilitado(true)
-					.build();
-			promocionDiaDeLaMadre.getDetalles().add(promocionDetalle2);
-
-			promocionRepository.save(promocionDiaEnamorados);
-			promocionRepository.save(promocionDiaDeLaMadre);
-
-
-
-
-
-
-
-			/*
 			// crear fotos para cada insumo
 			ImagenArticulo imagenArticuloCoca = ImagenArticulo.builder().
 					url("https://m.media-amazon.com/images/I/51v8nyxSOYL._SL1500_.jpg").
@@ -632,7 +555,8 @@ public class BuenSaborApplication {
 			logger.info("{}",sucursalMarDelPlata);
 			logger.info("----------------Pedido ---------------------");
 			logger.info("{}",pedido);
-		*/};
+		};
 	}
+	*/
 
 }

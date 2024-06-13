@@ -6,7 +6,9 @@ import com.entidades.buenSabor.business.service.PromocionService;
 import com.entidades.buenSabor.business.service.SucursalService;
 import com.entidades.buenSabor.domain.entities.ImagenArticulo;
 import com.entidades.buenSabor.domain.entities.Promocion;
+import com.entidades.buenSabor.domain.entities.PromocionDetalle;
 import com.entidades.buenSabor.repositories.ImagenArticuloRepository;
+import com.entidades.buenSabor.repositories.PromocionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +17,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 
 @Service
 public class PromocionServiceImp extends BaseServiceImp<Promocion, Long> implements PromocionService {
 
     private static final Logger logger = LoggerFactory.getLogger(PromocionServiceImp.class);
+
+    @Autowired
+    private PromocionRepository promocionRepository ;
 
     @Autowired
     SucursalService sucursalService;
@@ -146,4 +150,22 @@ public class PromocionServiceImp extends BaseServiceImp<Promocion, Long> impleme
             return new ResponseEntity<>("{\"status\":\"ERROR\", \"message\":\"" + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @Override
+    public List<PromocionDetalle> getPromocionWithDetalles(Long promocionId) {
+        return promocionRepository.getById(promocionId).getDetalles().stream().toList();
+    }
+
+    @Override
+    public List<Promocion> getAllActiveNow() {
+        //enviamos como parametros el dia actual y la hora actual para saber la lista de promociones activas en el momento
+        return promocionRepository.findActivePromociones(LocalDate.now(), LocalTime.now());
+    }
+
+    @Override
+    public List<Promocion> getAllHabilitados() {
+        return promocionRepository.findByEliminadoFalseAndHabilitadoTrue();
+    }
+
+
 }

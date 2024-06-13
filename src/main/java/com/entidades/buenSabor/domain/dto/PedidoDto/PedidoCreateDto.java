@@ -1,5 +1,7 @@
 package com.entidades.buenSabor.domain.dto.PedidoDto;
 
+import com.entidades.buenSabor.domain.dto.DetallePedido.DetallePedidoCreateDto;
+import com.entidades.buenSabor.domain.dto.DetallePedido.DetallePedidoDto;
 import com.entidades.buenSabor.domain.enums.Estado;
 import com.entidades.buenSabor.domain.enums.FormaPago;
 import com.entidades.buenSabor.domain.enums.TipoEnvio;
@@ -8,9 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -24,7 +29,9 @@ public class PedidoCreateDto {//este va en el post
     private TipoEnvio tipoEnvio;
     private FormaPago formaPago;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaPedido;
 
-    private Long idSucursal;
+   // private Long idSucursal;
+    private Set<DetallePedidoCreateDto> detallePedidos;
 }

@@ -23,7 +23,9 @@ public class SucursalServiceImpl extends BaseServiceImp<Sucursal,Long> implement
     }
 
     @Override
-    public List<Promocion> findPromocionesBySucursalId(Long idSucursal) {
+    public List<Promocion> findPromocionBySucursalId(Long idSucursal) {
         return sucursalRepository.findWithPromocionesById(idSucursal).getPromociones().stream().toList();
     }
+
+
 }

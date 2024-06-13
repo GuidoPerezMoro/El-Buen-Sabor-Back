@@ -10,6 +10,8 @@ import java.util.List;
 public interface SucursalService  extends BaseService<Sucursal, Long> {
     public List<Categoria> findCategoriasBySucursalId(Long idSucursal);
 
-    public List<Promocion> findPromocionesBySucursalId(Long idSucursal);
+    public List<Promocion> findPromocionBySucursalId(Long idSucursal);
+
+
 }
 

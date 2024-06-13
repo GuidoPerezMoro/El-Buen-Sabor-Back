@@ -7,8 +7,11 @@ import com.entidades.buenSabor.business.service.CloudinaryService;
 import com.entidades.buenSabor.domain.entities.ArticuloInsumo;
 import com.entidades.buenSabor.domain.entities.ArticuloManufacturadoDetalle;
 import com.entidades.buenSabor.domain.entities.ImagenArticulo;
+import com.entidades.buenSabor.domain.entities.PromocionDetalle;
+import com.entidades.buenSabor.repositories.ArticuloInsumoRepository;
 import com.entidades.buenSabor.repositories.ArticuloManufacturadoDetalleRepository;
 import com.entidades.buenSabor.repositories.ImagenArticuloRepository;
+import com.entidades.buenSabor.repositories.PromocionDetalleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,18 +27,24 @@ public class ArticuloInsumoServiceImp extends BaseServiceImp<ArticuloInsumo, Lon
     private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
 
     @Autowired
+    private PromocionDetalleRepository promocionDetalleRepository;
+
+    @Autowired
     ImagenArticuloRepository imagenArticuloRepository;
 
     @Autowired
     private CloudinaryService cloudinaryService; // Servicio para interactuar con Cloudinary
 
+    @Autowired
+    ArticuloInsumoRepository articuloInsumoRepository;
 
     @Override
     public void deleteById(Long id) throws RestrictDeleteException {
         var insumo = getById(id);
         List<ArticuloManufacturadoDetalle> detalles = articuloManufacturadoDetalleRepository.findByArticuloInsumo(insumo);
+        long detallesPromos = promocionDetalleRepository.countByArticulo(insumo);
        // Si el size de detalles es igual a 0 es porque el insumo no esta en ningun detalle
-        if(detalles.size() != 0)
+        if(detalles.size() != 0 || detallesPromos != 0)
             throw new RestrictDeleteException("No se puede eliminar el insumo por la integridad referencial de los datos");
         //si el insumo no esta en ninguno detalle se elimina
         baseRepository.delete(insumo);
@@ -46,6 +55,11 @@ public class ArticuloInsumoServiceImp extends BaseServiceImp<ArticuloInsumo, Lon
         var articulo = getById(id);
         articulo.setHabilitado(!articulo.isHabilitado());
         baseRepository.save(articulo);
+    }
+
+    @Override
+    public List<ArticuloInsumo> getAllHabilitados() {
+        return articuloInsumoRepository.findByEliminadoFalseAndHabilitadoTrue();
     }
 
     // Método para obtener todas las imágenes almacenadas

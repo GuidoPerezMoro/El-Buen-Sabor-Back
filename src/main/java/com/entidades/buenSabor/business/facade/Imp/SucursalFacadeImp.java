@@ -28,10 +28,10 @@ public class SucursalFacadeImp extends BaseFacadeImp<Sucursal, SucursalDto, Sucu
     CategoriaMapper categoriaMapper;
 
     @Autowired
-    PromocionMapper promocionMapper;
+    SucursalService sucursalService;
 
     @Autowired
-    SucursalService sucursalService;
+    PromocionMapper promocionMapper;
 
     @Override
     public List<CategoriaDto> findAllCategoriasByIdSucursal(Long idSucursal) {
@@ -39,7 +39,9 @@ public class SucursalFacadeImp extends BaseFacadeImp<Sucursal, SucursalDto, Sucu
     }
 
     @Override
-    public List<PromocionDto> findAllPromocionesByIdSucursal(Long idSucursal) {
-        return promocionMapper.toDTOsList(sucursalService.findPromocionesBySucursalId(idSucursal));
+    public List<PromocionDto> findAllPromocionesBySucursal(Long idSucursal) {
+        return promocionMapper.toDTOsList(sucursalService.findPromocionBySucursalId(idSucursal));
     }
+
+
 }

@@ -21,7 +21,7 @@ import java.util.Set;
 @Getter
 @ToString
 @SuperBuilder
-//@Audited
+@Audited
 public class Pedido extends Base{
 
     private LocalTime horaEstimadaFinalizacion;
@@ -32,13 +32,13 @@ public class Pedido extends Base{
     private FormaPago formaPago;
     private LocalDate fechaPedido;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Domicilio domicilio;
 
     @ManyToOne
     private Sucursal sucursal;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Factura factura;
 
     @ManyToOne

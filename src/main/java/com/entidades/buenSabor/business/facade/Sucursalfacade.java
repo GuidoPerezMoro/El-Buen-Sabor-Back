@@ -12,5 +12,5 @@ import java.util.List;
 public interface Sucursalfacade extends BaseFacade<SucursalDto, SucursalCreateDto, SucursalEditDto, Long> {
     public List<CategoriaDto> findAllCategoriasByIdSucursal(Long idSucursal);
 
-    public List<PromocionDto> findAllPromocionesByIdSucursal(Long idSucursal);
+    public List<PromocionDto> findAllPromocionesBySucursal(Long isSucursal);
 }
