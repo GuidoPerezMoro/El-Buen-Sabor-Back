@@ -64,5 +64,4 @@ public class Sucursal extends  Base{
     @NotAudited
     @Builder.Default
     private Set<Articulo> articulos = new HashSet<>();
-
 }

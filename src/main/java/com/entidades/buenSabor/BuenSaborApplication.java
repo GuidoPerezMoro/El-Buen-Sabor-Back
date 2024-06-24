@@ -15,68 +15,54 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 
 @SpringBootApplication
 public class BuenSaborApplication {
         private static final Logger logger = LoggerFactory.getLogger(BuenSaborApplication.class);
-/*
+
         @Autowired
         private ClienteRepository clienteRepository;
         @Autowired
         private ImagenEmpleadoRepository imagenEmpleadoRepository;
         @Autowired
         private PromocionDetalleRepository promocionDetalleRepository;
-
         @Autowired
         private UsuarioRepository usuarioRepository;
-
         @Autowired
         private PaisRepository paisRepository;
-
         @Autowired
         private ProvinciaRepository provinciaRepository;
-
         @Autowired
         private LocalidadRepository localidadRepository;
-
         @Autowired
         private EmpresaRepository empresaRepository;
-
         @Autowired
         private SucursalRepository sucursalRepository;
-
         @Autowired
         private DomicilioRepository domicilioRepository;
-
         @Autowired
         private UnidadMedidaRepository unidadMedidaRepository;
-
         @Autowired
         private CategoriaRepository categoriaRepository;
-
         @Autowired
         private ArticuloInsumoRepository articuloInsumoRepository;
-
         @Autowired
         private ArticuloManufacturadoRepository articuloManufacturadoRepository;
-
         @Autowired
         private ImagenArticuloRepository imagenArticuloRepository;
-
         @Autowired
         private PromocionRepository promocionRepository;
-
         @Autowired
         private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
-*/
 
         public static void main(String[] args) {
                 SpringApplication.run(BuenSaborApplication.class, args);
                 logger.info("\nEstoy activo en el main");
         }
 
-      /*  @Bean
+        @Bean
         @Transactional
         CommandLineRunner init(ClienteRepository clienteRepository,
                                ImagenEmpleadoRepository imagenEmpleadoRepository,
@@ -95,9 +81,11 @@ public class BuenSaborApplication {
                                ImagenArticuloRepository imagenArticuloRepository,
                                PromocionRepository promocionRepository,
                                PedidoRepository pedidoRepository,
-                               EmpleadoRepository empleadoRepository, FacturaRepository facturaRepository) {
+                               EmpleadoRepository empleadoRepository,
+                               FacturaRepository facturaRepository) {
                 return args -> {
-                        logger.info("----------------ESTOY----FUNCIONANDO---------------------");
+                        logger.info("--------------------- ESTOY FUNCIONANDO ---------------------");
+                        /*
                         // Etapa del dashboard
                         // Crear 1 pais
                         // Crear 2 provincias para ese pais
@@ -147,7 +135,7 @@ public class BuenSaborApplication {
                         sucursalRepository.save(sucursalGuaymallen);
                         sucursalRepository.save(sucursalMarDelPlata);
 
-//                    //ASOCIAMOS LOS DOMICILIOS A SUCURSAL
+//                      //ASOCIAMOS LOS DOMICILIOS A SUCURSAL
                         sucursalGuaymallen.setDomicilio(domicilioBerutti);
                         sucursalMarDelPlata.setDomicilio(domicilioGaboto);
 //
@@ -161,7 +149,7 @@ public class BuenSaborApplication {
                         // Grabo las sucursales
                         sucursalRepository.save(sucursalGuaymallen);
                         sucursalRepository.save(sucursalMarDelPlata);
-                        // Grabi empresa
+                        // Grabo empresa
                         empresaRepository.save(empresaCarlos);
 
                         // Crear Categorías de productos y subCategorías de los mismos
@@ -200,7 +188,7 @@ public class BuenSaborApplication {
                         // Grabo las Subcategorías
                         categoriaRepository.save(categoriaBebidas);
 
-                        logger.info("---------------voy a asignar a Guaymallen--------------------");
+                        logger.info("--------------------Voy a asignar a Guaymallen--------------------");
                         //ASOCIAMOS CATEGORIAS CON SUCURSAL
                         categoriaInsumos.getSucursales().add(sucursalGuaymallen);
                         // Cargo las categorias a la sucursal guaymallen
@@ -213,12 +201,9 @@ public class BuenSaborApplication {
                         // Grabo las categorias que vende esa sucursal
                         sucursalRepository.save(sucursalGuaymallen);
 
-                        logger.info("---------------saque el save de abajo-------------------");
+                        logger.info("--------------------Grabe Guaymallen--------------------");
 
-
-                        logger.info("---------------grabe guaymallen--------------------");
-
-                        logger.info("---------------voy a asignar a Mardel Plata--------------------");
+                        logger.info("--------------------voy a asignar a Mar del Plata--------------------");
                         categoriaInsumos.getSucursales().add(sucursalMarDelPlata);
                         // Cargo las categorias a la sucursal Mardel Plata
                         sucursalMarDelPlata.getCategorias().add(categoriaInsumos);
@@ -226,10 +211,10 @@ public class BuenSaborApplication {
                         sucursalMarDelPlata.getCategorias().add(categoriaGaseosas);
                         sucursalMarDelPlata.getCategorias().add(categoriaTragos);
                         sucursalMarDelPlata.getCategorias().add(categoriaPizzas);
-// Grabo las categorias que vende esa sucursal
+                        // Grabo las categorias que vende esa sucursal
                         sucursalRepository.save(sucursalMarDelPlata);
 
-                        logger.info("---------------grabe Mardel Plata--------------------");
+                        logger.info("--------------------grabe Mar del Plata--------------------");
 
 
                         // Crear Unidades de medida
@@ -263,7 +248,6 @@ public class BuenSaborApplication {
                         articuloInsumoRepository.save(queso);
                         articuloInsumoRepository.save(tomate);
 
-
                         // Crear Articulos Manufacturados
                         ArticuloManufacturado pizzaMuzarella = ArticuloManufacturado.builder().
                                 denominacion("Pizza Muzarella").
@@ -294,7 +278,7 @@ public class BuenSaborApplication {
                         articuloManufacturadoDetalleRepository.save(detalle4);
                         articuloManufacturadoDetalleRepository.save(detalle5);
 
-                        //ASOCIAMOS LOS DETALLE MANUFACTURADO AL ARTICULO MANUFACTURADO - LA RECETA
+                        // ASOCIAMOS LOS DETALLE MANUFACTURADO AL ARTICULO MANUFACTURADO - LA RECETA
                         pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle1);
                         pizzaMuzarella.getArticuloManufacturadoDetalles().add(detalle2);
 
@@ -322,12 +306,12 @@ public class BuenSaborApplication {
                         harina.getImagenes().add(imagenArticuloHarina);
                         queso.getImagenes().add(imagenArticuloQueso);
                         tomate.getImagenes().add(imagenArticuloTomate);
+
                         // Grabamos los Articulos
                         articuloInsumoRepository.save(cocaCola);
                         articuloInsumoRepository.save(harina);
                         articuloInsumoRepository.save(queso);
                         articuloInsumoRepository.save(tomate);
-
 
                         //ASOCIAMOS CATEGORIA CON INSUMOS
                         categoriaInsumos.getArticulos().add(harina);
@@ -339,9 +323,9 @@ public class BuenSaborApplication {
 
                         // Crear fotos para los artículos manufacturados
                         ImagenArticulo imagenArticuloPizzaMuzarella = ImagenArticulo.builder().
-                                url("https://storage.googleapis.com/fitia-api-bucket/media/images/recipe_images/1002846.jpg").
+                                url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNJZ1ZkJdBL6UYqgRhKtaV5mDkX_LgKp679g&s").
                                 build();
-                        ImagenArticulo imagenArticuloPizzaNapolitana = ImagenArticulo.builder().url("https://assets.elgourmet.com/wp-content/uploads/2023/03/8metlvp345_portada-pizza-1024x686.jpg.webp").build();
+                        ImagenArticulo imagenArticuloPizzaNapolitana = ImagenArticulo.builder().url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP6cfXt4E__YrJpOTEqB-cbSlutbysuM5w0w&s").build();
                         imagenArticuloRepository.save(imagenArticuloPizzaMuzarella);
                         imagenArticuloRepository.save(imagenArticuloPizzaNapolitana);
 
@@ -412,7 +396,7 @@ public class BuenSaborApplication {
 
                         //sucursalRepository.findById();
 //--------------------- ESTOS SAVE SE HACIAN NUEVAMENTE CON LA INSTANCIA ANTERIOR
-//  Por eso daba duplicado, revisa rla logica de esta parte
+//  Por eso daba duplicado, revisar la logica de esta parte
                         // Sucursal Guaymallee
                         Sucursal sucursalId1 = sucursalRepository.findWithPromocionesById(1L);
                         Sucursal sucursalId2 = sucursalRepository.findWithPromocionesById(2L);
@@ -437,9 +421,76 @@ public class BuenSaborApplication {
                                 .map(Sucursal::getNombre)
                                 .forEach(logger::info);
                         logger.info("----------------------------------------------------------------");
+                        */
 
-//
-//
+                        // GRABAMOS LOS USUARIOS DE AUTH0 EN LA MISMA SUCURSAL
+                        // Obtener la sucursal con id=1
+                        Optional<Sucursal> optionalSucursal = sucursalRepository.findById(1L);
+                        if (optionalSucursal.isPresent()) {
+                                Sucursal sucursal = optionalSucursal.get();
+
+                                // Crear usuarios
+                                Usuario adminUsuario = Usuario.builder()
+                                        .auth0Id("auth0|6679018afcfc4d5aea5b62aa")
+                                        .userName("administrador")
+                                        .build();
+
+                                Usuario empleadoUsuario = Usuario.builder()
+                                        .auth0Id("auth0|667901f24dc2a2f7799bfd5d")
+                                        .userName("empleado")
+                                        .build();
+
+                                Usuario cocineroUsuario = Usuario.builder()
+                                        .auth0Id("auth0|6679024201de4d750dd28166")
+                                        .userName("cocinero")
+                                        .build();
+
+                                usuarioRepository.save(adminUsuario);
+                                usuarioRepository.save(empleadoUsuario);
+                                usuarioRepository.save(cocineroUsuario);
+
+                                // Crear empleados
+                                Empleado adminEmpleado = Empleado.builder()
+                                        .nombre("Admin")
+                                        .apellido("Admin")
+                                        .telefono("2612547461")
+                                        .email("admin@elbuensabor.com")
+                                        .fechaNacimiento(LocalDate.of(1997, 5, 15))
+                                        .rol(Rol.ADMIN)
+                                        .sucursal(sucursal)
+                                        .build();
+
+                                Empleado empleadoEmpleado = Empleado.builder()
+                                        .nombre("Empleado")
+                                        .apellido("Empleado")
+                                        .telefono("2616971206")
+                                        .email("empleado@elbuensabor.com")
+                                        .fechaNacimiento(LocalDate.of(2001, 1, 1))
+                                        .rol(Rol.EMPLEADO)
+                                        .sucursal(sucursal)
+                                        .build();
+
+                                Empleado cocineroEmpleado = Empleado.builder()
+                                        .nombre("Cocinero")
+                                        .apellido("Cocinero")
+                                        .telefono("2614121359")
+                                        .email("cocinero@elbuensabor.com")
+                                        .fechaNacimiento(LocalDate.of(2003, 1, 1))
+                                        .rol(Rol.COCINERO)
+                                        .sucursal(sucursal)
+                                        .build();
+
+                                empleadoRepository.save(adminEmpleado);
+                                empleadoRepository.save(empleadoEmpleado);
+                                empleadoRepository.save(cocineroEmpleado);
+
+                                logger.info("Usuarios y empleados hardcodeados agregados exitosamente.");
+                        } else {
+                                logger.error("Sucursal con id=1 no encontrada.");
+                        }
+
+
+// LO QUE ESTÁ A CONTINUACIÓN NO HA SIDO EJECUTADO
 //
 //
 //
@@ -537,6 +588,9 @@ public class BuenSaborApplication {
 		};
 	}*/
                 };
+        }
+}
+
 
 
 

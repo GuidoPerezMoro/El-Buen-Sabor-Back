@@ -24,5 +24,4 @@ public class EmpleadoDto extends BaseDto {
     private LocalDate fechaNacimiento;
     private Rol rol;
     private SucursalShortShort sucursal;
-
 }
