@@ -11,6 +11,7 @@ import com.entidades.buenSabor.domain.entities.Empresa;
 
 import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,12 +23,28 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Em
         super(facade);
     }
 
+    @Override
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> create(@RequestBody EmpresaCreateDto entity) {
+        return super.create(entity);
+    }
+
+    @Override
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<EmpresaDto> edit (EmpresaEditDto entity, Long id){
+        return super.edit(entity,id);
+    }
+
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/sucursales/{idEmpresa}")
     public ResponseEntity<EmpresaLargeDto> getEmpresaSucursales(@PathVariable Long idEmpresa){
         return ResponseEntity.ok(facade.getEmpresaSucursales(idEmpresa));
     }
 
     // Método POST para subir imágenes
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/uploads")
     public ResponseEntity<String> uploadImages(
             @RequestParam(value = "uploads", required = true) MultipartFile[] files,
@@ -41,6 +58,7 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Em
     }
 
     // Método POST para eliminar imágenes por su publicId y Long
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/deleteImg")
     public ResponseEntity<String> deleteById(
             @RequestParam(value = "publicId", required = true) String publicId,

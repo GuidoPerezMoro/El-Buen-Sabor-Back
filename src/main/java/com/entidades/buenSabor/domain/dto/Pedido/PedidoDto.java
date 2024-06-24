@@ -1,7 +1,11 @@
-package com.entidades.buenSabor.domain.dto.PedidoDto;
+package com.entidades.buenSabor.domain.dto.Pedido;
 
-import com.entidades.buenSabor.domain.dto.DetallePedido.DetallePedidoCreateDto;
+import com.entidades.buenSabor.domain.dto.BaseDto;
 import com.entidades.buenSabor.domain.dto.DetallePedido.DetallePedidoDto;
+import com.entidades.buenSabor.domain.dto.Cliente.ClienteShortDto;
+import com.entidades.buenSabor.domain.dto.Domicilio.DomicilioDtoPedido;
+import com.entidades.buenSabor.domain.dto.Domicilio.DomicilioShortDto;
+import com.entidades.buenSabor.domain.dto.Factura.FacturaDto;
 import com.entidades.buenSabor.domain.enums.Estado;
 import com.entidades.buenSabor.domain.enums.FormaPago;
 import com.entidades.buenSabor.domain.enums.TipoEnvio;
@@ -10,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -20,7 +23,8 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PedidoCreateDto {//este va en el post
+public class PedidoDto extends BaseDto {//este va en el get
+
     @Schema(type = "string", format = "time", pattern = "HH:mm:ss", description = "Horario de apertura en formato HH:mm:ss")
     private LocalTime horaEstimadaFinalizacion;
     private Double total;
@@ -28,10 +32,16 @@ public class PedidoCreateDto {//este va en el post
     private Estado estado;
     private TipoEnvio tipoEnvio;
     private FormaPago formaPago;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaPedido;
 
-   // private Long idSucursal;
-    private Set<DetallePedidoCreateDto> detallePedidos;
+    //private SucursalShortShort sucursal;
+
+    private Set<DetallePedidoDto> detallePedidos;
+
+    private DomicilioDtoPedido domicilio;
+
+    private FacturaDto factura;
+
+    private ClienteShortDto cliente;
+
 }

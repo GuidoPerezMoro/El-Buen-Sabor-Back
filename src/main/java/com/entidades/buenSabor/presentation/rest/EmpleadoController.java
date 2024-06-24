@@ -8,10 +8,8 @@ import com.entidades.buenSabor.domain.entities.Empleado;
 import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
@@ -21,8 +19,20 @@ public class EmpleadoController extends BaseControllerImp<Empleado, EmpleadoDto,
         super(facade);
     }
 
+    @Override
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> create (EmpleadoCreateDto entity){
+        return super.create(entity);
+    }
+
     @GetMapping("/findByEmail")
     public ResponseEntity<?> findByEmail(@RequestBody String email){
         return ResponseEntity.ok(facade.findByEmail(email));
+    }
+
+    @GetMapping("/bySucursalId/{id}")
+    public ResponseEntity<?> findBySucursalId(@PathVariable Long id){
+        return ResponseEntity.ok(facade.findAllBySucursalId(id));
     }
 }
