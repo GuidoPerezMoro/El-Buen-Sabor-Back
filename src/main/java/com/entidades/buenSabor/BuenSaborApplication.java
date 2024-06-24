@@ -423,6 +423,7 @@ public class BuenSaborApplication {
                         logger.info("----------------------------------------------------------------");
                         */
 
+                        /*
                         // GRABAMOS LOS USUARIOS DE AUTH0 EN LA MISMA SUCURSAL
                         // Obtener la sucursal con id=1
                         Optional<Sucursal> optionalSucursal = sucursalRepository.findById(1L);
@@ -488,6 +489,8 @@ public class BuenSaborApplication {
                         } else {
                                 logger.error("Sucursal con id=1 no encontrada.");
                         }
+
+                         */
 
 
 // LO QUE ESTÁ A CONTINUACIÓN NO HA SIDO EJECUTADO
