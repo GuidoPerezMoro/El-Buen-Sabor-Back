@@ -21,7 +21,7 @@ import java.util.Optional;
 @SpringBootApplication
 public class BuenSaborApplication {
         private static final Logger logger = LoggerFactory.getLogger(BuenSaborApplication.class);
-
+        /*
         @Autowired
         private ClienteRepository clienteRepository;
         @Autowired
@@ -56,11 +56,14 @@ public class BuenSaborApplication {
         private PromocionRepository promocionRepository;
         @Autowired
         private ArticuloManufacturadoDetalleRepository articuloManufacturadoDetalleRepository;
+        */
 
         public static void main(String[] args) {
                 SpringApplication.run(BuenSaborApplication.class, args);
                 logger.info("\nEstoy activo en el main");
         }
+
+/*
 
         @Bean
         @Transactional
@@ -392,7 +395,7 @@ public class BuenSaborApplication {
 // revisar PARA QUE GRABE EL DETALLE DE LA PROMOCION
 //-------------- ACA HAY QUE HARCODEAR PARA TRAER POR ID CADA SUCURSAL
 // La sucursal buscada, luego debe salvarse nuevamente, pero ahora ya existe es como un Updete
-// Peimero la busco y luego la grabo
+// Primero la busco y luego la grabo
 
                         //sucursalRepository.findById();
 //--------------------- ESTOS SAVE SE HACIAN NUEVAMENTE CON LA INSTANCIA ANTERIOR
@@ -421,9 +424,9 @@ public class BuenSaborApplication {
                                 .map(Sucursal::getNombre)
                                 .forEach(logger::info);
                         logger.info("----------------------------------------------------------------");
-                        */
 
-                        /*
+
+
                         // GRABAMOS LOS USUARIOS DE AUTH0 EN LA MISMA SUCURSAL
                         // Obtener la sucursal con id=1
                         Optional<Sucursal> optionalSucursal = sucursalRepository.findById(1L);
@@ -490,7 +493,7 @@ public class BuenSaborApplication {
                                 logger.error("Sucursal con id=1 no encontrada.");
                         }
 
-                         */
+
 
 
 // LO QUE ESTÁ A CONTINUACIÓN NO HA SIDO EJECUTADO
@@ -589,9 +592,12 @@ public class BuenSaborApplication {
 			logger.info("----------------Pedido ---------------------");
 			logger.info("{}",pedido);
 		};
-	}*/
+	}
                 };
+
         }
+ */
+
 }
 
 

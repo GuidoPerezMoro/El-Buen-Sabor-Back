@@ -7,6 +7,7 @@ import com.entidades.buenSabor.domain.dto.Empleado.EmpleadoEditDto;
 import com.entidades.buenSabor.domain.entities.Empleado;
 import com.entidades.buenSabor.presentation.rest.Base.BaseControllerImp;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,17 @@ public class EmpleadoController extends BaseControllerImp<Empleado, EmpleadoDto,
     public ResponseEntity<?> findByEmail(@RequestBody String email){
         return ResponseEntity.ok(facade.findByEmail(email));
     }
+
+/*
+    @GetMapping("/findByEmail")
+    public ResponseEntity<?> findByEmail(@RequestParam String email){
+        EmpleadoDto empleado = facade.findByEmail(email);
+        if (empleado == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleado not found");
+        }
+        return ResponseEntity.ok(empleado);
+    }
+*/
 
     @GetMapping("/bySucursalId/{id}")
     public ResponseEntity<?> findBySucursalId(@PathVariable Long id){

@@ -35,7 +35,7 @@ public class Empleado extends Base{
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.REFRESH, orphanRemoval = true)
     @ToString.Exclude
     @Builder.Default
-    private Set<Pedido> pedidos= new HashSet<>();
+    private Set<Pedido> pedidos = new HashSet<>();
 
     @ManyToOne
     @ToString.Exclude
