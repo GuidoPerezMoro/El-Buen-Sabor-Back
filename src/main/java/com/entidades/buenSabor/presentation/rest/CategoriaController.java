@@ -32,12 +32,12 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaD
 
     @PostMapping
     @Override
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<?> create(CategoriaCreateDto entity){
         return super.create(entity);
     }
 
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     @PutMapping("/addSubCategoria/{idCategoria}")
     public ResponseEntity<CategoriaDto> addSubCategoria(@PathVariable Long idCategoria, @RequestBody CategoriaCreateDto subCategoria){
         return ResponseEntity.status(HttpStatus.CREATED).body(facade.addSubCategoria(idCategoria,subCategoria));
@@ -45,7 +45,7 @@ public class CategoriaController extends BaseControllerImp<Categoria, CategoriaD
 
     @PutMapping("/{id}")
     @Override
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<CategoriaDto> edit(CategoriaEditDto entity, Long id){
         return super.edit(entity,id);
     }

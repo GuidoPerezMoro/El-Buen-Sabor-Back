@@ -20,14 +20,14 @@ public class UnidadMedidaController extends BaseControllerImp<UnidadMedida, Unid
 
     @PostMapping
     @Override
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<?> create(UnidadMedidaCreateDto entity){
         return super.create(entity);
     }
 
     @PutMapping("/{id}")
     @Override
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<UnidadMedidaDto> edit(UnidadDeMedidaEditDto edit, Long id){
         return super.edit(edit,id);
     }

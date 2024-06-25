@@ -25,14 +25,14 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Em
 
     @Override
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SUPERADMIN')")
     public ResponseEntity<?> create(@RequestBody EmpresaCreateDto entity) {
         return super.create(entity);
     }
 
     @Override
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SUPERADMIN')")
     public ResponseEntity<EmpresaDto> edit (EmpresaEditDto entity, Long id){
         return super.edit(entity,id);
     }
@@ -44,7 +44,7 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Em
     }
 
     // Método POST para subir imágenes
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SUPERADMIN')")
     @PostMapping("/uploads")
     public ResponseEntity<String> uploadImages(
             @RequestParam(value = "uploads", required = true) MultipartFile[] files,
@@ -58,7 +58,7 @@ public class EmpresaController extends BaseControllerImp<Empresa, EmpresaDto, Em
     }
 
     // Método POST para eliminar imágenes por su publicId y Long
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SUPERADMIN')")
     @PostMapping("/deleteImg")
     public ResponseEntity<String> deleteById(
             @RequestParam(value = "publicId", required = true) String publicId,

@@ -29,14 +29,14 @@ public class SucursalController extends BaseControllerImp<Sucursal, SucursalDto,
 
     @Override
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SUPERADMIN')")
     public ResponseEntity<?> create(SucursalCreateDto entity){
         return super.create(entity);
     }
 
     @Override
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','SUPERADMIN')")
     public ResponseEntity<SucursalDto> edit (SucursalEditDto entity, Long id){
         return super.edit(entity, id);
     }

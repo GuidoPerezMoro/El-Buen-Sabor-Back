@@ -12,7 +12,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("El Buen Sabor - Grupo 2")
+                        .title("El Buen Sabor - Grupo 2: White Dragons")
                         .version("v 1.12")
                         .description("<b>\"El Buen Sabor\"</b> E-commerce </br> API" +
                                 "<h3> Integrantes</h3>" +

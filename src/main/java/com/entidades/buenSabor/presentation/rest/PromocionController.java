@@ -26,25 +26,25 @@ public class PromocionController extends BaseControllerImp<Promocion, PromocionD
 
     @Override
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<?> create(PromocionCreate entity){
         return super.create(entity);
     }
 
     @Override
     @PutMapping("/{id}")
-     @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+     @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<PromocionDto> edit(PromocionEdit edit, Long id){
         return super.edit(edit, id);
     }
 
     @PutMapping("/detalles/{id}")
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     public ResponseEntity<PromocionDto> editDetalles(@RequestBody Set<PromocionDetalleCreate> detalles,@PathVariable Long id){
         return ResponseEntity.ok(facade.editDetalles(detalles, id));
     }
 
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     @PutMapping("/changeHabilitado/{id}")
     public ResponseEntity<?> changeHabilitado(@PathVariable Long id){
         facade.changeHabilitado(id);
@@ -62,7 +62,7 @@ public class PromocionController extends BaseControllerImp<Promocion, PromocionD
     }
 
     // Método POST para subir imágenes
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     @PostMapping("/uploads")
     public ResponseEntity<String> uploadImages(
             @RequestParam(value = "uploads", required = true) MultipartFile[] files,
@@ -76,7 +76,7 @@ public class PromocionController extends BaseControllerImp<Promocion, PromocionD
     }
 
     // Método POST para eliminar imágenes por su publicId y Long
-    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('EMPLEADO','ADMIN','SUPERADMIN')")
     @PostMapping("/deleteImg")
     public ResponseEntity<String> deleteById(
             @RequestParam(value = "publicId", required = true) String publicId,

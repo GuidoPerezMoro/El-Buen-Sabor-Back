@@ -15,8 +15,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@RestController
-@CrossOrigin("*")
+    @RestController
+    @CrossOrigin("*")
     @RequestMapping("/pedido")
 public class PedidoController extends BaseControllerImp<Pedido, PedidoDto, PedidoCreateDto,PedidoCreateDto,Long, PedidoFacadeImp> {
     public PedidoController(PedidoFacadeImp facade) {

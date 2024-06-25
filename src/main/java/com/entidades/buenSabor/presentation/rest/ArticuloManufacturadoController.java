@@ -21,14 +21,14 @@ public class ArticuloManufacturadoController extends BaseControllerImp<ArticuloM
 
     @Override
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN','SUPERADMIN')")
     public ResponseEntity<?> create(ArticuloManufacturadoCreateDto entity){
         return super.create(entity);
     }
 
     @Override
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN','SUPERADMIN')")
     public ResponseEntity<ArticuloManufacturadoDto> edit(ArticuloManufacturadoEditDto entity, Long id){
         return super.edit(entity, id);
     }
@@ -38,11 +38,11 @@ public class ArticuloManufacturadoController extends BaseControllerImp<ArticuloM
         return ResponseEntity.ok(facade.findAllDetalles(id));
     }
 
-    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN','SUPERADMIN')")
     @PutMapping("/changeHabilitado/{id}")
     public ResponseEntity<?> changeHabilitado(@PathVariable Long id){
         facade.changeHabilitado(id);
-        return ResponseEntity.ok().body("Se cambio el estado del Insuomo");
+        return ResponseEntity.ok().body("Se cambio el estado del Insumo");
     }
 
     @GetMapping("/getHabilitados")
@@ -56,7 +56,7 @@ public class ArticuloManufacturadoController extends BaseControllerImp<ArticuloM
     }
 
     // Método POST para subir imágenes
-    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN','SUPERADMIN')")
     @PostMapping("/uploads")
     public ResponseEntity<String> uploadImages(
             @RequestParam(value = "uploads", required = true) MultipartFile[] files,
@@ -70,7 +70,7 @@ public class ArticuloManufacturadoController extends BaseControllerImp<ArticuloM
     }
 
     // Método POST para eliminar imágenes por su publicId y Long
-    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('COCINERO','ADMIN','SUPERADMIN')")
     @PostMapping("/deleteImg")
     public ResponseEntity<String> deleteById(
             @RequestParam(value = "publicId", required = true) String publicId,
