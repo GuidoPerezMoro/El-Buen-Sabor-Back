@@ -1,0 +1,26 @@
+.gradle/
+.idea/
+build/
+gradle/
+src/
+    main/
+        java/com.entidades.buenSabor/
+            audit
+            business
+            Config
+            domain
+            MyException
+            presentation
+            repositories
+            Security
+            utils
+            BuenSaborApplication.java
+        resources/
+            application.properties
+.gitignore
+build.gradle
+Dockerfile
+gradlew
+gradlew.bat
+jsons.txt
+settings.gradle
